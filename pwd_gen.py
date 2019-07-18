@@ -68,6 +68,5 @@ if __name__ == "__main__":
 # create two digit randomizer 
 #   future feature - give option for number of digits?
 # test 1000000 generated passwords for repetition
-# how do we test how easy the password is to break?
-# write swift version for iOS
+# how easy is it to guess the generated password?
 # how do we randomize the digit order?
