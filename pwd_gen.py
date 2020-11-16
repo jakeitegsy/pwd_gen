@@ -50,9 +50,10 @@ class Generator:
     
 if __name__ == "__main__":
     try:
-        number_of_passwords = sys.argv[1]
-    except KeyError:
+        number_of_passwords = int(sys.argv[1])
+    except (KeyError, ValueError) as error:
+        print("Defaulting to 10 passwords because of the following error: ", error, "\n")
         number_of_passwords = 10
     print(f"Here are {number_of_passwords} password suggestions for you...")
     generator = Generator()
-    generator.generate_passwords(10)
+    print(generator.generate_passwords(number_of_passwords))
