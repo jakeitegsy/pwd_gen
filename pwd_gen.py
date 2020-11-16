@@ -11,40 +11,48 @@ Password Generator
         ReadingBlueGiraffe42
 """
 import string
+import sys
 
 from secrets import choice
 from itertools import permutations
 
+def get_words(filename):
+    with open(f"{filename}.txt") as file:
+        return list(set([word.strip() for word in file]))
+
+def joiner(collection):
+    return "".join(collection)
+
+def get_random_word(words):
+    return joiner(choice(words).title().split())
+
+def get_random_digits(number=4):
+    return joiner(choice(string.digits) for i in range(number))
+
+
 class Generator:
 
     def __init__(self):
-        self.nouns = self.get_words("nouns")
-        self.non_nouns = self.get_words("non_nouns")
-        self.colors = self.get_words("colors")
-
-    def get_words(self, filename):
-        with open(f"{filename}.txt") as file:
-            return list(set([word.strip() for word in file]))
-
-    def get_random_word(self, words):
-        return "".join(choice(words).title().strip().split())
-
-    @staticmethod
-    def get_random_digits(number=4):
-        return "".join(choice(string.digits) for i in range(number))
+        self.nouns = get_words("nouns")
+        self.non_nouns = get_words("non_nouns")
+        self.colors = get_words("colors")
 
     def generate_password(self):
-        color = self.get_random_word(self.colors)
-        noun = self.get_random_word(self.nouns)
-        non_noun = self.get_random_word(self.non_nouns)
-        digits = self.get_random_digits(2)
+        color = get_random_word(self.colors)
+        noun = get_random_word(self.nouns)
+        non_noun = get_random_word(self.non_nouns)
+        digits = get_random_digits(2)
         password = (noun, color, non_noun, digits)
-        return "".join(choice([i for i in permutations(password)]))
+        return joiner(choice([i for i in permutations(password)]))
     
     def generate_passwords(self, number=1):
         return [self.generate_password() for i in range(number)]
     
 if __name__ == "__main__":
-    print("Here are 20 password suggestions for you...")
+    try:
+        number_of_passwords = sys.argv[1]
+    except KeyError:
+        number_of_passwords = 10
+    print(f"Here are {number_of_passwords} password suggestions for you...")
     generator = Generator()
-    generator.generate_passwords(20)
+    generator.generate_passwords(10)
