@@ -24,7 +24,7 @@ class Generator:
 
     def get_words(self, filename):
         with open(f"{filename}.txt") as file:
-            return list(set(file.readlines()))
+            return list(set([word.strip() for word in file]))
 
     def get_random_word(self, list):
         return "".join(choice(list).title().strip().split())
