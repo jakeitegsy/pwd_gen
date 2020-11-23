@@ -60,7 +60,7 @@ if __name__ == "__main__":
     number_of_passwords = 10
     try:
         number_of_passwords = int(sys.argv[1])
-    except (KeyError, ValueError, IndexError) as error:
+    except (ValueError, IndexError):
         print("Defaulting to 10 passwords:\n")
     finally:
         print(f"Here are {number_of_passwords} password suggestions for you...")
