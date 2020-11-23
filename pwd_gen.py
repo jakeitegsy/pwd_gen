@@ -38,13 +38,12 @@ class Generator:
         self.colors = get_words("colors")
 
     def generate_password(self):
-        #color = get_random_word(self.colors)
-        color = get_random_word(
-            ("Red", "Orange", "Green", "Yellow", "Blue", "Indigo", "Violet")
-        )
+        #colors = ("Red", "Orange", "Green", "Yellow", "Blue", "Indigo", "Violet")
+        #color = get_random_word(colors)
+        color = get_random_word(self.colors)
         noun = get_random_word(self.nouns)
         other = get_random_word(self.others)
-        digits = get_random_digits(2)
+        digits = get_random_digits(4)
         password = (
             noun,
             color,
