@@ -37,20 +37,24 @@ class Generator:
         self.others = get_words("others")
         self.colors = get_words("colors")
 
-    def generate_password(self):
-        #colors = ("Red", "Orange", "Green", "Yellow", "Blue", "Indigo", "Violet")
-        #color = get_random_word(colors)
-        color = get_random_word(self.colors)
-        noun = get_random_word(self.nouns)
-        other = get_random_word(self.others)
-        digits = get_random_digits(2)
-        password = (
-            noun,
-            color,
-            other,
-            digits
+    def choices(self):
+        return (
+            get_random_word(self.colors),
+            get_random_word(self.nouns),
+            # get_random_word(self.others),
+            get_random_digits(2),
         )
-        return joiner(choice([i for i in permutations(password)]))
+
+
+    def generate_password(self):
+        return joiner(
+            choice(
+                [
+                    password for password in
+                    permutations(self.choices())
+                ]
+            )
+        )
 
     def generate_passwords(self, number=1):
         return [self.generate_password() for i in range(number)]
