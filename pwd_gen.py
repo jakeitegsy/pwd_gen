@@ -1,5 +1,5 @@
 #! usr/bin/env python
-""" 
+"""
 Password Generator
     Creates an Alpha numeric password from a permutation of
         - non-noun e.g. Reading
@@ -43,7 +43,7 @@ class Generator:
         color = get_random_word(self.colors)
         noun = get_random_word(self.nouns)
         other = get_random_word(self.others)
-        digits = get_random_digits(4)
+        digits = get_random_digits(2)
         password = (
             noun,
             color,
@@ -51,10 +51,10 @@ class Generator:
             digits
         )
         return joiner(choice([i for i in permutations(password)]))
-    
+
     def generate_passwords(self, number=1):
         return [self.generate_password() for i in range(number)]
-    
+
 if __name__ == "__main__":
     number_of_passwords = 10
     try:
@@ -64,4 +64,5 @@ if __name__ == "__main__":
     finally:
         print(f"Here are {number_of_passwords} password suggestions for you...")
         generator = Generator()
-        print(generator.generate_passwords(number_of_passwords))
+        for password in generator.generate_passwords(number_of_passwords):
+            print(password)
