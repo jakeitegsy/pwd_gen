@@ -66,6 +66,7 @@ class Generator:
             password = self.generate_password()
             if len(password) > 14:
                 result.append(password)
+        return result
 
 if __name__ == "__main__":
     number_of_passwords = 10
