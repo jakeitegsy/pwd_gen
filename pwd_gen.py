@@ -29,6 +29,9 @@ def get_random_word(words):
 def get_random_digits(number=4):
     return joiner(choice(string.digits) for i in range(number))
 
+def get_random_symbol():
+    return joiner(choice('!@#$'))
+
 
 class Generator:
 
@@ -43,6 +46,7 @@ class Generator:
             get_random_word(self.nouns),
             # get_random_word(self.others),
             get_random_digits(2),
+            get_random_symbol()
         )
 
 
@@ -57,7 +61,11 @@ class Generator:
         )
 
     def generate_passwords(self, number=1):
-        return [self.generate_password() for i in range(number)]
+        result = []
+        while len(result) < number:
+            password = self.generate_password()
+            if len(password) > 14:
+                result.append(password)
 
 if __name__ == "__main__":
     number_of_passwords = 10
